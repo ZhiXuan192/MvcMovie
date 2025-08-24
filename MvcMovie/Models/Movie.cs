@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace MvcMovie.Models
 {
@@ -35,6 +36,7 @@ namespace MvcMovie.Models
         [StringLength(30)]
         public string? Director { get; set; }
 
+        public ICollection<Review> Reviews { get; set; } = new List<Review>();
 
     }
 }

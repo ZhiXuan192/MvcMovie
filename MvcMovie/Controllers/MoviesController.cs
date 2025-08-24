@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Data;
 using MvcMovie.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace MvcMovie.Controllers
 {
@@ -187,5 +188,13 @@ namespace MvcMovie.Controllers
             return _context.Movie.Any(e => e.Id == id);
         }
 
+        public async Task SeedRoles(IServiceProvider serviceProvider)
+        {
+            using (var scope = serviceProvider.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                await MvcMovie.Models.RoleSeeder.SeedRolesAsync(roleManager);
+            }
+        }
     } 
 }
